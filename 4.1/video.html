@@ -12,12 +12,16 @@
 </body>
 <script>
 
+    function handleErr(error){
+        console.log("访问用户媒体设备失败：", error.name, error.message);
+    }
+
     function onOpenCamera() {
         navigator.mediaDevices.getUserMedia({ video: true, audio: false })
             .then(function (stream) {
             const video = document.querySelector("#local-video");
             video.srcObject = stream;
-        }).catch(null);
+        }).catch(handleErr);
     }
 
     document.querySelector("#showVideo").addEventListener("click", onOpenCamera);
