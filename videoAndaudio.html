@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频和音频</title>
+</head>
+<body>
+    <video id="local-video" autoplay playsinline></video>
+    <button id="showVideo"> 开音视频 </button>
+    <p> 通过getUserMedia() 开音视频 </p>
+</body>
+<script>
+    function handleErr(error){
+        console.log("error = " + error)
+    }
+
+    function onOpenCamera() {
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then(function (stream) {
+            const video = document.querySelector("#local-video");
+            video.srcObject = stream;
+        }).catch(handleErr);
+    }
+
+    document.querySelector("#showVideo").addEventListener("click", onOpenCamera);
+</script>
+</html>
